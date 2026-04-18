@@ -1,17 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-interface Goal {
-  text: string;
-  completed?: boolean;
-  date?: string;
+interface Goal   { text: string; completed?: boolean; date?: string; }
+interface Sub    { title: string; goals: Goal[]; img?: string; imgAlt?: string; }
+interface Section {
+  title: string;
+  direct?: Goal[];
+  subsections?: Sub[];
+  img?: string;
+  imgAlt?: string;
 }
-interface Subsection { title: string; goals: Goal[]; }
-interface Section { title: string; direct?: Goal[]; subsections?: Subsection[]; }
+
+// Replace any src with a real image path (e.g. "/images/climbing.jpg") whenever ready.
+// Placeholders are themed to match the site.
+const P = (label: string) =>
+  `https://placehold.co/230x140/0d1626/38bdb7?text=${encodeURIComponent(label)}&font=montserrat`;
 
 const sections: Section[] = [
   {
     title: 'Overall',
+    img: P('Graduation'),
+    imgAlt: 'Academic graduation',
     direct: [
       { text: 'Get my PhD' },
     ],
@@ -24,6 +33,8 @@ const sections: Section[] = [
     subsections: [
       {
         title: 'Climbing',
+        img: P('Rock Climbing'),
+        imgAlt: 'Rock climbing',
         goals: [
           { text: 'Climb a V4 Boulder', completed: true, date: 'Feb 10, 2026' },
           { text: 'Climb a V5 Boulder', completed: true, date: 'Mar 28, 2026' },
@@ -36,6 +47,8 @@ const sections: Section[] = [
       },
       {
         title: 'Weight Lifting',
+        img: P('Gym'),
+        imgAlt: 'Gym and weights',
         goals: [
           { text: 'Bench bodyweight' },
           { text: 'Bench 100 Kg' },
@@ -50,12 +63,16 @@ const sections: Section[] = [
       },
       {
         title: 'Tennis',
+        img: P('Tennis'),
+        imgAlt: 'Tennis',
         goals: [
           { text: 'Beat Aaron Yip (handicapped to play lefty forehand) in a 5 set, 11 point game' },
         ],
       },
       {
         title: 'Running',
+        img: P('Running'),
+        imgAlt: 'Running',
         goals: [
           { text: '6 minute mile' },
           { text: '30 minute 5K' },
@@ -68,6 +85,8 @@ const sections: Section[] = [
   },
   {
     title: 'Piano',
+    img: P('Piano'),
+    imgAlt: 'Piano keys',
     direct: [
       { text: 'Sweden by C418' },
       { text: 'Nuvole Bianche by Ludovico Einaudi' },
@@ -76,6 +95,8 @@ const sections: Section[] = [
   },
   {
     title: 'Language',
+    img: P('中文'),
+    imgAlt: 'Chinese characters',
     direct: [
       { text: 'A2 proficiency in Mandarin' },
       { text: 'B1 proficiency in Mandarin' },
@@ -84,6 +105,8 @@ const sections: Section[] = [
   },
   {
     title: 'Recreation',
+    img: P('Scuba Diving'),
+    imgAlt: 'Underwater diving',
     direct: [
       { text: 'Visit every continent (Visited: Asia, North America, Africa, Europe)' },
       { text: 'Skydive' },
@@ -99,32 +122,50 @@ const sections: Section[] = [
 
   {sections.map(section => (
     <div class="section">
-      <h2 class="section-title">{section.title}</h2>
 
-      {section.direct?.map(g => (
-        <div class={`goal-row ${g.completed ? 'completed' : ''}`}>
-          <div class={`checkbox ${g.completed ? 'checked' : ''}`}>
-            {g.completed && <svg viewBox="0 0 12 12" width="10" height="10"><polyline points="1.5,6 4.5,9 10.5,3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>}
-          </div>
-          <span class="goal-text">{g.text}</span>
-          <span class="goal-date">{g.date ?? ''}</span>
-        </div>
-      ))}
+      {/* Left: goals */}
+      <div class="section-content">
+        <h2 class="section-title">{section.title}</h2>
 
-      {section.subsections?.map(sub => (
-        <div class="subsection">
-          <h3 class="subsection-title">{sub.title}</h3>
-          {sub.goals.map(g => (
-            <div class={`goal-row ${g.completed ? 'completed' : ''}`}>
-              <div class={`checkbox ${g.completed ? 'checked' : ''}`}>
-                {g.completed && <svg viewBox="0 0 12 12" width="10" height="10"><polyline points="1.5,6 4.5,9 10.5,3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>}
-              </div>
-              <span class="goal-text">{g.text}</span>
-              <span class="goal-date">{g.date ?? ''}</span>
+        {section.direct?.map(g => (
+          <div class={`goal-row ${g.completed ? 'completed' : ''}`}>
+            <div class={`checkbox ${g.completed ? 'checked' : ''}`}>
+              {g.completed && <svg viewBox="0 0 12 12" width="10" height="10"><polyline points="1.5,6 4.5,9 10.5,3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>}
             </div>
-          ))}
-        </div>
-      ))}
+            <span class="goal-text">{g.text}</span>
+            <span class="goal-date">{g.date ?? ''}</span>
+          </div>
+        ))}
+
+        {section.subsections?.map(sub => (
+          <div class="subsection">
+            <h3 class="subsection-title">{sub.title}</h3>
+            {sub.goals.map(g => (
+              <div class={`goal-row ${g.completed ? 'completed' : ''}`}>
+                <div class={`checkbox ${g.completed ? 'checked' : ''}`}>
+                  {g.completed && <svg viewBox="0 0 12 12" width="10" height="10"><polyline points="1.5,6 4.5,9 10.5,3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+                </div>
+                <span class="goal-text">{g.text}</span>
+                <span class="goal-date">{g.date ?? ''}</span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      {/* Right: image(s) */}
+      <div class="section-imgs">
+        {section.img && !section.subsections && (
+          <img src={section.img} alt={section.imgAlt ?? ''} class="section-img" />
+        )}
+        {section.subsections?.map(sub => sub.img && (
+          <div class="sub-img-wrap">
+            <span class="sub-img-label">{sub.title}</span>
+            <img src={sub.img} alt={sub.imgAlt ?? ''} class="section-img" />
+          </div>
+        ))}
+      </div>
+
     </div>
   ))}
 </Layout>
@@ -132,7 +173,18 @@ const sections: Section[] = [
 <style>
   h1 { font-size: 2rem; color: #fff; margin-bottom: 2rem; }
 
-  .section { margin-bottom: 2.5rem; }
+  .section {
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    align-items: start;
+  }
+
+  @media (max-width: 720px) {
+    .section { grid-template-columns: 1fr; }
+    .section-imgs { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  }
 
   .section-title {
     font-size: 1.1rem;
@@ -158,7 +210,7 @@ const sections: Section[] = [
 
   .goal-row {
     display: grid;
-    grid-template-columns: 20px 1fr auto;
+    grid-template-columns: 18px 1fr auto;
     align-items: center;
     gap: 0.75rem;
     padding: 0.35rem 0.5rem;
@@ -175,21 +227,38 @@ const sections: Section[] = [
   }
   .checkbox.checked { background: #38bdb7; border-color: #38bdb7; }
 
-  .goal-text {
-    font-size: 0.9rem;
-    color: #c8d0e0;
-    line-height: 1.4;
-  }
-  .completed .goal-text {
-    text-decoration: line-through;
-    color: rgba(200,208,224,0.35);
-  }
+  .goal-text { font-size: 0.9rem; color: #c8d0e0; line-height: 1.4; }
+  .completed .goal-text { text-decoration: line-through; color: rgba(200,208,224,0.35); }
 
   .goal-date {
     font-size: 0.78rem;
     color: #38bdb7;
     white-space: nowrap;
-    min-width: 110px;
+    min-width: 105px;
     text-align: right;
+  }
+
+  /* Images */
+  .section-imgs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-top: 0.25rem;
+  }
+
+  .section-img {
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid rgba(56,189,183,0.2);
+    display: block;
+  }
+
+  .sub-img-wrap { display: flex; flex-direction: column; gap: 0.3rem; }
+
+  .sub-img-label {
+    font-size: 0.7rem;
+    color: rgba(56,189,183,0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
   }
 </style>
