@@ -1,17 +1,195 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import GoalTracker from '../components/GoalTracker.tsx';
+
+interface Goal {
+  text: string;
+  completed?: boolean;
+  date?: string;
+}
+interface Subsection { title: string; goals: Goal[]; }
+interface Section { title: string; direct?: Goal[]; subsections?: Subsection[]; }
+
+const sections: Section[] = [
+  {
+    title: 'Overall',
+    direct: [
+      { text: 'Get my PhD' },
+    ],
+  },
+  {
+    title: 'Fitness',
+    direct: [
+      { text: 'Drop down to 73 Kg' },
+    ],
+    subsections: [
+      {
+        title: 'Climbing',
+        goals: [
+          { text: 'Climb a V4 Boulder', completed: true, date: 'Feb 10, 2026' },
+          { text: 'Climb a V5 Boulder', completed: true, date: 'Mar 28, 2026' },
+          { text: 'Climb a V6 Boulder' },
+          { text: 'Climb a V7 Boulder' },
+          { text: 'Climb a 5c Route' },
+          { text: 'Climb a 6a+ Route' },
+          { text: 'Climb a 6c Route' },
+        ],
+      },
+      {
+        title: 'Weight Lifting',
+        goals: [
+          { text: 'Bench bodyweight' },
+          { text: 'Bench 100 Kg' },
+          { text: 'Squat 1.5x bodyweight' },
+          { text: 'Squat 100 Kg' },
+          { text: 'Deadlift 140 Kg' },
+          { text: 'Deadlift 2x bodyweight' },
+          { text: '10 Pullups' },
+          { text: 'Weighted Pullup 20 Kg' },
+          { text: 'One-armed Pullup' },
+        ],
+      },
+      {
+        title: 'Tennis',
+        goals: [
+          { text: 'Beat Aaron Yip (handicapped to play lefty forehand) in a 5 set, 11 point game' },
+        ],
+      },
+      {
+        title: 'Running',
+        goals: [
+          { text: '6 minute mile' },
+          { text: '30 minute 5K' },
+          { text: '1 hour 10K' },
+          { text: 'Run a half-marathon' },
+          { text: 'Run a full marathon' },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Piano',
+    direct: [
+      { text: 'Sweden by C418' },
+      { text: 'Nuvole Bianche by Ludovico Einaudi' },
+      { text: 'Chords to Blue by Yung Kai' },
+    ],
+  },
+  {
+    title: 'Language',
+    direct: [
+      { text: 'A2 proficiency in Mandarin' },
+      { text: 'B1 proficiency in Mandarin' },
+      { text: 'B2 proficiency in Mandarin' },
+    ],
+  },
+  {
+    title: 'Recreation',
+    direct: [
+      { text: 'Visit every continent (Visited: Asia, North America, Africa, Europe)' },
+      { text: 'Skydive' },
+      { text: 'Scuba dive' },
+      { text: 'Shark cage dive' },
+    ],
+  },
+];
 ---
 
 <Layout title="Goals">
-  <div class="page-header">
-    <h1>Goal Tracker</h1>
-    <p class="subtitle">Click any goal to mark it complete.</p>
-  </div>
-  <GoalTracker client:only="react" />
+  <h1>Goal Tracker</h1>
+
+  {sections.map(section => (
+    <div class="section">
+      <h2 class="section-title">{section.title}</h2>
+
+      {section.direct?.map(g => (
+        <div class={`goal-row ${g.completed ? 'completed' : ''}`}>
+          <div class={`checkbox ${g.completed ? 'checked' : ''}`}>
+            {g.completed && <svg viewBox="0 0 12 12" width="10" height="10"><polyline points="1.5,6 4.5,9 10.5,3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+          </div>
+          <span class="goal-text">{g.text}</span>
+          <span class="goal-date">{g.date ?? ''}</span>
+        </div>
+      ))}
+
+      {section.subsections?.map(sub => (
+        <div class="subsection">
+          <h3 class="subsection-title">{sub.title}</h3>
+          {sub.goals.map(g => (
+            <div class={`goal-row ${g.completed ? 'completed' : ''}`}>
+              <div class={`checkbox ${g.completed ? 'checked' : ''}`}>
+                {g.completed && <svg viewBox="0 0 12 12" width="10" height="10"><polyline points="1.5,6 4.5,9 10.5,3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+              </div>
+              <span class="goal-text">{g.text}</span>
+              <span class="goal-date">{g.date ?? ''}</span>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  ))}
 </Layout>
 
 <style>
-  h1 { font-size: 2rem; color: #fff; }
-  .subtitle { margin-top: 0.4rem; color: #9ca3af; font-size: 0.9rem; margin-bottom: 2.5rem; }
+  h1 { font-size: 2rem; color: #fff; margin-bottom: 2rem; }
+
+  .section { margin-bottom: 2.5rem; }
+
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid rgba(56,189,183,0.3);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .subsection { margin: 1rem 0 0 1.5rem; }
+
+  .subsection-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #38bdb7;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 0.5rem;
+  }
+
+  .goal-row {
+    display: grid;
+    grid-template-columns: 20px 1fr auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.35rem 0.5rem;
+    margin-left: 1rem;
+  }
+
+  .checkbox {
+    width: 15px; height: 15px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    color: #0a0f1e;
+  }
+  .checkbox.checked { background: #38bdb7; border-color: #38bdb7; }
+
+  .goal-text {
+    font-size: 0.9rem;
+    color: #c8d0e0;
+    line-height: 1.4;
+  }
+  .completed .goal-text {
+    text-decoration: line-through;
+    color: rgba(200,208,224,0.35);
+  }
+
+  .goal-date {
+    font-size: 0.78rem;
+    color: #38bdb7;
+    white-space: nowrap;
+    min-width: 110px;
+    text-align: right;
+  }
 </style>
