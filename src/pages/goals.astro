@@ -1,8 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import GoalTracker from '../components/GoalTracker.tsx';
 ---
 
 <Layout title="Goals">
-  <h1 style="color:#fff;">Goals</h1>
-  <p style="margin-top: 1rem; color: #9ca3af;">Tracker coming soon.</p>
+  <div class="page-header">
+    <h1>Goal Tracker</h1>
+    <p class="subtitle">Click any goal to mark it complete.</p>
+  </div>
+  <GoalTracker client:only="react" />
 </Layout>
+
+<style>
+  h1 { font-size: 2rem; color: #fff; }
+  .subtitle { margin-top: 0.4rem; color: #9ca3af; font-size: 0.9rem; margin-bottom: 2.5rem; }
+</style>
