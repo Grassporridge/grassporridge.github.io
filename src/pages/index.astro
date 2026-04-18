@@ -13,8 +13,13 @@ import NetworkCanvas from '../components/NetworkCanvas.tsx';
   <div class="hero-content">
     <h1>Sarvesh Menon</h1>
     <p class="handle">Grassporridge</p>
-    <p class="tagline">Systems Biology · Biological Aging · Microbial Ecology · Deep Learning · Bayesian Modelling</p>
-    <a href="/blog" class="cta">See my work</a>
+    <p class="tagline">Systems Biology · Biological Aging · Microbial Ecology · Deep Learning · Latent Representations · Bayesian Modelling</p>
+    <div class="cta-group">
+      <a href="/blog" class="cta">Monthly Projects</a>
+      <a href="/cv" class="cta">Curriculum Vitae</a>
+      <a href="/goals" class="cta">Goal Tracker</a>
+      <a href="/contact" class="cta">Reach Out</a>
+    </div>
   </div>
 
   <!-- About -->
@@ -28,49 +33,37 @@ import NetworkCanvas from '../components/NetworkCanvas.tsx';
         <p>
           I'm a PhD researcher in the <a href="https://www.venturellilab.org/" target="_blank">Venturelli Lab</a> in the
           Department of Biomedical Engineering at Duke University. My work sits at the intersection of
-          microbial ecology, systems biology, and computational modelling — trying to understand how
+          microbial ecology, systems biology, and computational modelling; trying to understand how
           complex biological systems are organised and how they change over time.
         </p>
         <p>
-          I've wanted to build a personal website for a while — somewhere to document side projects, track goals,
+          I've wanted to build a personal website for a while, somewhere to document side projects, track goals,
           and write about ideas outside of my day-to-day research. With LLMs making this finally tractable,
           I no longer have an excuse. This site and the projects here are being built in collaboration with Claude.
-        </p>
-        <p class="interests-line">
-          <span class="interest-tag">Systems Biology</span>
-          <span class="interest-tag">Biological Aging</span>
-          <span class="interest-tag">Microbial Ecology</span>
-          <span class="interest-tag">Deep Learning</span>
-          <span class="interest-tag">Latent Representations</span>
-          <span class="interest-tag">Bayesian Modelling</span>
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Interests -->
-  <section class="interests">
-    <h2>What I explore</h2>
-    <div class="cards">
-      <div class="card">
-        <span class="icon">🧬</span>
-        <h3>Systems Biology</h3>
-        <p>Modelling the emergent behaviour of biological networks — from gene regulation to cellular dynamics.</p>
+  <!-- Personal Interests -->
+  <section class="personal">
+    <h2>Outside the lab</h2>
+    <div class="personal-cards">
+      <div class="personal-card">
+        <span class="icon">🧗</span>
+        <span>Rock Climbing</span>
       </div>
-      <div class="card">
-        <span class="icon">🧠</span>
-        <h3>Deep Learning</h3>
-        <p>Applying neural architectures to biological data: sequences, images, and multi-omics.</p>
+      <div class="personal-card">
+        <span class="icon">🎾</span>
+        <span>Tennis</span>
       </div>
-      <div class="card">
-        <span class="icon">📊</span>
-        <h3>Bayesian Modelling</h3>
-        <p>Probabilistic reasoning and uncertainty quantification in complex biological systems.</p>
+      <div class="personal-card">
+        <span class="icon">🏋️</span>
+        <span>Gym</span>
       </div>
-      <div class="card">
-        <span class="icon">⏳</span>
-        <h3>Biological Aging</h3>
-        <p>Understanding the molecular clocks and hallmarks of aging through computational lenses.</p>
+      <div class="personal-card">
+        <span class="icon">🎹</span>
+        <span>Piano</span>
       </div>
     </div>
   </section>
@@ -117,9 +110,16 @@ import NetworkCanvas from '../components/NetworkCanvas.tsx';
     letter-spacing: 0.04em;
   }
 
+  .cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
   .cta {
     display: inline-block;
-    margin-top: 2rem;
     padding: 0.7rem 1.8rem;
     border: 1px solid #38bdb7;
     color: #38bdb7;
@@ -136,7 +136,7 @@ import NetworkCanvas from '../components/NetworkCanvas.tsx';
     border-top: 1px solid rgba(255,255,255,0.08);
   }
 
-  .about h2, .interests h2 {
+  .about h2, .personal h2 {
     font-size: 1.4rem;
     color: rgba(255,255,255,0.5);
     text-transform: uppercase;
@@ -182,47 +182,34 @@ import NetworkCanvas from '../components/NetworkCanvas.tsx';
   }
   .about-text a:hover { text-decoration: underline; }
 
-  .interests-line {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-  }
-
-  .interest-tag {
-    font-size: 0.75rem;
-    padding: 0.25rem 0.75rem;
-    border: 1px solid rgba(56,189,183,0.3);
-    border-radius: 999px;
-    color: #38bdb7;
-  }
-
-  /* Interests cards */
-  .interests {
+  /* Personal Interests */
+  .personal {
     padding: 4rem 0 6rem;
     border-top: 1px solid rgba(255,255,255,0.08);
   }
 
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 1.25rem;
+  .personal-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
 
-  .card {
-    border: 1px solid rgba(56, 189, 183, 0.25);
+  .personal-card {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid rgba(56,189,183,0.25);
     border-radius: 8px;
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(6px);
+    background: rgba(255,255,255,0.04);
+    color: #e5e5e5;
+    font-size: 0.95rem;
     transition: background 0.2s, border-color 0.2s;
   }
-  .card:hover {
-    background: rgba(56, 189, 183, 0.08);
-    border-color: rgba(56, 189, 183, 0.5);
+  .personal-card:hover {
+    background: rgba(56,189,183,0.08);
+    border-color: rgba(56,189,183,0.5);
   }
 
-  .icon { font-size: 1.8rem; }
-  .card h3 { margin-top: 0.75rem; font-size: 1rem; color: #fff; }
-  .card p { margin-top: 0.5rem; font-size: 0.875rem; color: #9ca3af; line-height: 1.5; }
+  .icon { font-size: 1.4rem; }
 </style>
