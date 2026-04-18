@@ -4,12 +4,27 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="Contact">
   <h1>Contact</h1>
-  <p class="sub">Feel free to reach out about research, collaborations, or just to say hi.</p>
+  <p class="sub">
+    Feel free to reach out about projects, collaboration, or anything in general.
+    I will get back to you within a few days, experimental sleep deprivation permitting.
+  </p>
 
   <div class="links">
     <a href="mailto:sarveshmenon00@gmail.com" class="link-item">
-      <span class="label">Email</span>
+      <span class="label">Personal</span>
       <span class="value">sarveshmenon00@gmail.com</span>
+    </a>
+    <a href="mailto:sarvesh.menon@duke.edu" class="link-item">
+      <span class="label">Academic</span>
+      <span class="value">sarvesh.menon@duke.edu</span>
+    </a>
+    <a href="https://www.linkedin.com/in/sarvesh-menon/" target="_blank" class="link-item">
+      <span class="label">LinkedIn</span>
+      <span class="value">sarvesh-menon</span>
+    </a>
+    <a href="https://scholar.google.com/citations?user=_Tr34KAAAAAJ&hl=en" target="_blank" class="link-item">
+      <span class="label">Scholar</span>
+      <span class="value">Google Scholar</span>
     </a>
     <a href="https://github.com/Grassporridge" target="_blank" class="link-item">
       <span class="label">GitHub</span>
@@ -20,7 +35,12 @@ import Layout from '../layouts/Layout.astro';
 
 <style>
   h1 { font-size: 2rem; color: #fff; }
-  .sub { margin-top: 0.75rem; color: #9ca3af; }
+  .sub {
+    margin-top: 0.75rem;
+    color: #9ca3af;
+    line-height: 1.6;
+    max-width: 520px;
+  }
 
   .links {
     margin-top: 2.5rem;
@@ -33,7 +53,7 @@ import Layout from '../layouts/Layout.astro';
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    padding: 1.25rem 1.5rem;
+    padding: 1.1rem 1.5rem;
     border: 1px solid rgba(56, 189, 183, 0.25);
     border-radius: 8px;
     text-decoration: none;
@@ -43,6 +63,6 @@ import Layout from '../layouts/Layout.astro';
   }
   .link-item:hover { background: rgba(56,189,183,0.08); border-color: rgba(56,189,183,0.5); }
 
-  .label { font-size: 0.8rem; color: #9ca3af; width: 60px; }
-  .value { font-weight: 500; }
+  .label { font-size: 0.8rem; color: #9ca3af; width: 70px; flex-shrink: 0; }
+  .value { font-weight: 500; font-size: 0.95rem; }
 </style>
