@@ -130,7 +130,7 @@ export default function BlogPosts() {
 
         .search {
           width: 100%;
-          max-width: 480px;
+          max-width: 640px;
           padding: 0.6rem 1rem;
           background: rgba(255,255,255,0.05);
           border: 1px solid rgba(56,189,183,0.25);
