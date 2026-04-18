@@ -4,14 +4,16 @@ import NetworkCanvas from '../components/NetworkCanvas.tsx';
 ---
 
 <Layout title="Home">
-  <!-- Hero -->
-  <div slot="full-width" class="hero">
+  <!-- Fixed full-page background -->
+  <div slot="full-width" class="bg-canvas">
     <NetworkCanvas client:only="react" />
-    <div class="hero-content">
-      <h1>Grassporridge</h1>
-      <p class="tagline">Systems Biology · Deep Learning · Bayesian Modelling · Biological Aging</p>
-      <a href="/blog" class="cta">See my work</a>
-    </div>
+  </div>
+
+  <!-- Hero text -->
+  <div class="hero-content">
+    <h1>Grassporridge</h1>
+    <p class="tagline">Systems Biology · Deep Learning · Bayesian Modelling · Biological Aging</p>
+    <a href="/blog" class="cta">See my work</a>
   </div>
 
   <!-- Interests -->
@@ -43,19 +45,24 @@ import NetworkCanvas from '../components/NetworkCanvas.tsx';
 </Layout>
 
 <style>
-  .hero {
-    position: relative;
-    height: 90vh;
+  /* fixed canvas behind everything */
+  .bg-canvas {
+    position: fixed;
+    inset: 0;
     background: #0a0f1e;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    z-index: -1;
   }
 
+  /* make main content readable over dark bg */
+  :global(body) { background: #0a0f1e; }
+  :global(main) { position: relative; z-index: 1; }
+
   .hero-content {
-    position: relative;
-    z-index: 1;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     color: #fff;
   }
@@ -87,15 +94,13 @@ import NetworkCanvas from '../components/NetworkCanvas.tsx';
   .cta:hover { background: #38bdb7; color: #0a0f1e; }
 
   .interests {
-    padding: 4rem 2rem;
-    max-width: 900px;
-    margin: 0 auto;
+    padding: 4rem 0 6rem;
   }
 
   .interests h2 {
     font-size: 1.6rem;
     margin-bottom: 2rem;
-    color: #1a1a1a;
+    color: #fff;
   }
 
   .cards {
@@ -105,14 +110,19 @@ import NetworkCanvas from '../components/NetworkCanvas.tsx';
   }
 
   .card {
-    border: 1px solid #e5e5e5;
+    border: 1px solid rgba(56, 189, 183, 0.25);
     border-radius: 8px;
     padding: 1.5rem;
-    transition: box-shadow 0.2s;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(6px);
+    transition: background 0.2s, border-color 0.2s;
   }
-  .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+  .card:hover {
+    background: rgba(56, 189, 183, 0.08);
+    border-color: rgba(56, 189, 183, 0.5);
+  }
 
   .icon { font-size: 1.8rem; }
-  .card h3 { margin-top: 0.75rem; font-size: 1rem; }
-  .card p { margin-top: 0.5rem; font-size: 0.875rem; color: #555; line-height: 1.5; }
+  .card h3 { margin-top: 0.75rem; font-size: 1rem; color: #fff; }
+  .card p { margin-top: 0.5rem; font-size: 0.875rem; color: #9ca3af; line-height: 1.5; }
 </style>
