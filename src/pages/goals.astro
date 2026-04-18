@@ -5,13 +5,12 @@ interface Goal    { text: string; completed?: boolean; date?: string; }
 interface Sub     { title: string; goals: Goal[]; imgSrc: string; imgAlt: string; imgFlex: number; }
 interface Section { title: string; direct?: Goal[]; subsections?: Sub[]; imgSrc?: string; imgAlt?: string; imgFlex?: number; }
 
-const P = (label: string, flex = 1) =>
-  `https://placehold.co/260x${Math.round(flex * 120)}/0d1626/38bdb7?text=${encodeURIComponent(label)}&font=montserrat`;
+const IMG = (id: string) => `https://images.unsplash.com/photo-${id}?w=280&fit=crop&q=80`;
 
 const sections: Section[] = [
   {
     title: 'Overall',
-    imgSrc: P('Graduation', 1), imgAlt: 'Graduation', imgFlex: 1,
+    imgSrc: IMG('1523580846011-d3a5bc25702b'), imgAlt: 'Graduation', imgFlex: 1,
     direct: [
       { text: 'Get my PhD' },
     ],
@@ -20,7 +19,7 @@ const sections: Section[] = [
     title: 'Fitness',
     direct: [{ text: 'Drop down to 73 Kg' }],
     subsections: [
-      { title: 'Climbing',      imgSrc: P('Rock Climbing', 3),   imgAlt: 'Rock climbing',  imgFlex: 3,
+      { title: 'Climbing',      imgSrc: IMG('1522163182402-834f871fd851'), imgAlt: 'Rock climbing',  imgFlex: 3,
         goals: [
           { text: 'Climb a V4 Boulder', completed: true, date: 'Feb 10, 2026' },
           { text: 'Climb a V5 Boulder', completed: true, date: 'Mar 28, 2026' },
@@ -28,7 +27,7 @@ const sections: Section[] = [
           { text: 'Climb a 5c Route' },   { text: 'Climb a 6a+ Route' }, { text: 'Climb a 6c Route' },
         ],
       },
-      { title: 'Weight Lifting', imgSrc: P('Gym', 3.5), imgAlt: 'Gym', imgFlex: 3.5,
+      { title: 'Weight Lifting', imgSrc: IMG('1534438327276-14e5300c3a48'), imgAlt: 'Gym', imgFlex: 3.5,
         goals: [
           { text: 'Bench bodyweight' },        { text: 'Bench 100 Kg' },
           { text: 'Squat 1.5x bodyweight' },   { text: 'Squat 100 Kg' },
@@ -36,12 +35,12 @@ const sections: Section[] = [
           { text: '10 Pullups' },               { text: 'Weighted Pullup 20 Kg' }, { text: 'One-armed Pullup' },
         ],
       },
-      { title: 'Tennis', imgSrc: P('Tennis', 1), imgAlt: 'Tennis', imgFlex: 1,
+      { title: 'Tennis', imgSrc: IMG('1554068865-24cecd4e34b8'), imgAlt: 'Tennis', imgFlex: 1,
         goals: [
           { text: 'Beat Aaron Yip (handicapped to play lefty forehand) in a 5 set, 11 point game' },
         ],
       },
-      { title: 'Running', imgSrc: P('Running', 2), imgAlt: 'Running', imgFlex: 2,
+      { title: 'Running', imgSrc: IMG('1476480862126-209bfaa8edc8'), imgAlt: 'Running', imgFlex: 2,
         goals: [
           { text: '6 minute mile' }, { text: '30 minute 5K' },
           { text: '1 hour 10K' },    { text: 'Run a half-marathon' }, { text: 'Run a full marathon' },
@@ -51,7 +50,7 @@ const sections: Section[] = [
   },
   {
     title: 'Piano',
-    imgSrc: P('Piano', 1.5), imgAlt: 'Piano keys', imgFlex: 1.5,
+    imgSrc: IMG('1520523839897-bd0b52f945a0'), imgAlt: 'Piano keys', imgFlex: 1.5,
     direct: [
       { text: 'Sweden by C418' },
       { text: 'Nuvole Bianche by Ludovico Einaudi' },
@@ -60,7 +59,7 @@ const sections: Section[] = [
   },
   {
     title: 'Language',
-    imgSrc: P('中文', 1.5), imgAlt: 'Chinese characters', imgFlex: 1.5,
+    imgSrc: IMG('1528360983277-13d401cdc186'), imgAlt: 'Asian lanterns', imgFlex: 1.5,
     direct: [
       { text: 'A2 proficiency in Mandarin' },
       { text: 'B1 proficiency in Mandarin' },
@@ -69,7 +68,7 @@ const sections: Section[] = [
   },
   {
     title: 'Recreation',
-    imgSrc: P('Scuba Diving', 1.5), imgAlt: 'Underwater diving', imgFlex: 1.5,
+    imgSrc: IMG('1544551763-46a013bb70d5'), imgAlt: 'Scuba diving', imgFlex: 1.5,
     direct: [
       { text: 'Visit every continent (Visited: Asia, North America, Africa, Europe)' },
       { text: 'Skydive' }, { text: 'Scuba dive' }, { text: 'Shark cage dive' },
@@ -157,7 +156,6 @@ for (const s of sections) {
   }
   .goals-inner {
     max-width: 820px;
-    margin-left: auto;
     padding: 2.5rem 2rem 4rem 3rem;
   }
 
