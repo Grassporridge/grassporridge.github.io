@@ -1,8 +1,121 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import NetworkCanvas from '../components/NetworkCanvas.tsx';
 ---
 
 <Layout title="Home">
-  <h1>Hi, I'm Grassporridge</h1>
-  <p style="margin-top: 1rem; color: #555; font-size: 1.1rem;">Welcome to my personal site.</p>
+  <!-- Hero -->
+  <div class="hero">
+    <NetworkCanvas client:only="react" />
+    <div class="hero-content">
+      <h1>Grassporridge</h1>
+      <p class="tagline">Systems Biology · Deep Learning · Bayesian Modelling · Biological Aging</p>
+      <a href="/blog" class="cta">See my work</a>
+    </div>
+  </div>
+
+  <!-- Interests -->
+  <section class="interests">
+    <h2>What I explore</h2>
+    <div class="cards">
+      <div class="card">
+        <span class="icon">🧬</span>
+        <h3>Systems Biology</h3>
+        <p>Modelling the emergent behaviour of biological networks — from gene regulation to cellular dynamics.</p>
+      </div>
+      <div class="card">
+        <span class="icon">🧠</span>
+        <h3>Deep Learning</h3>
+        <p>Applying neural architectures to biological data: sequences, images, and multi-omics.</p>
+      </div>
+      <div class="card">
+        <span class="icon">📊</span>
+        <h3>Bayesian Modelling</h3>
+        <p>Probabilistic reasoning and uncertainty quantification in complex biological systems.</p>
+      </div>
+      <div class="card">
+        <span class="icon">⏳</span>
+        <h3>Biological Aging</h3>
+        <p>Understanding the molecular clocks and hallmarks of aging through computational lenses.</p>
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  /* override main padding for hero */
+  :global(main) { padding: 0 !important; }
+
+  .hero {
+    position: relative;
+    height: 90vh;
+    background: #0a0f1e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: #fff;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .tagline {
+    margin-top: 1rem;
+    color: #38bdb7;
+    font-size: clamp(0.85rem, 2vw, 1.05rem);
+    letter-spacing: 0.04em;
+  }
+
+  .cta {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.7rem 1.8rem;
+    border: 1px solid #38bdb7;
+    color: #38bdb7;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background 0.2s, color 0.2s;
+  }
+  .cta:hover { background: #38bdb7; color: #0a0f1e; }
+
+  .interests {
+    padding: 4rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .interests h2 {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    color: #1a1a1a;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .card {
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: box-shadow 0.2s;
+  }
+  .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+
+  .icon { font-size: 1.8rem; }
+  .card h3 { margin-top: 0.75rem; font-size: 1rem; }
+  .card p { margin-top: 0.5rem; font-size: 0.875rem; color: #555; line-height: 1.5; }
+</style>
