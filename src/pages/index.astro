@@ -11,10 +11,42 @@ import NetworkCanvas from '../components/NetworkCanvas.tsx';
 
   <!-- Hero text -->
   <div class="hero-content">
-    <h1>Grassporridge</h1>
-    <p class="tagline">Systems Biology · Deep Learning · Bayesian Modelling · Biological Aging</p>
+    <h1>Sarvesh Menon</h1>
+    <p class="handle">Grassporridge</p>
+    <p class="tagline">Systems Biology · Biological Aging · Microbial Ecology · Deep Learning · Bayesian Modelling</p>
     <a href="/blog" class="cta">See my work</a>
   </div>
+
+  <!-- About -->
+  <section class="about">
+    <h2>About me</h2>
+    <div class="about-grid">
+      <div class="about-photo">
+        <div class="photo-placeholder">Photo coming soon</div>
+      </div>
+      <div class="about-text">
+        <p>
+          I'm a PhD researcher in the <a href="https://www.venturellilab.org/" target="_blank">Venturelli Lab</a> in the
+          Department of Biomedical Engineering at Duke University. My work sits at the intersection of
+          microbial ecology, systems biology, and computational modelling — trying to understand how
+          complex biological systems are organised and how they change over time.
+        </p>
+        <p>
+          I've wanted to build a personal website for a while — somewhere to document side projects, track goals,
+          and write about ideas outside of my day-to-day research. With LLMs making this finally tractable,
+          I no longer have an excuse. This site and the projects here are being built in collaboration with Claude.
+        </p>
+        <p class="interests-line">
+          <span class="interest-tag">Systems Biology</span>
+          <span class="interest-tag">Biological Aging</span>
+          <span class="interest-tag">Microbial Ecology</span>
+          <span class="interest-tag">Deep Learning</span>
+          <span class="interest-tag">Latent Representations</span>
+          <span class="interest-tag">Bayesian Modelling</span>
+        </p>
+      </div>
+    </div>
+  </section>
 
   <!-- Interests -->
   <section class="interests">
@@ -45,7 +77,6 @@ import NetworkCanvas from '../components/NetworkCanvas.tsx';
 </Layout>
 
 <style>
-  /* fixed canvas behind everything */
   .bg-canvas {
     position: fixed;
     inset: 0;
@@ -53,10 +84,9 @@ import NetworkCanvas from '../components/NetworkCanvas.tsx';
     z-index: -1;
   }
 
-  /* make main content readable over dark bg */
-  :global(body) { background: #0a0f1e; }
   :global(main) { position: relative; z-index: 1; }
 
+  /* Hero */
   .hero-content {
     min-height: 80vh;
     display: flex;
@@ -73,10 +103,17 @@ import NetworkCanvas from '../components/NetworkCanvas.tsx';
     letter-spacing: -0.02em;
   }
 
+  .handle {
+    margin-top: 0.4rem;
+    color: rgba(255,255,255,0.35);
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+  }
+
   .tagline {
     margin-top: 1rem;
     color: #38bdb7;
-    font-size: clamp(0.85rem, 2vw, 1.05rem);
+    font-size: clamp(0.8rem, 2vw, 1rem);
     letter-spacing: 0.04em;
   }
 
@@ -93,14 +130,77 @@ import NetworkCanvas from '../components/NetworkCanvas.tsx';
   }
   .cta:hover { background: #38bdb7; color: #0a0f1e; }
 
-  .interests {
-    padding: 4rem 0 6rem;
+  /* About */
+  .about {
+    padding: 4rem 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
   }
 
-  .interests h2 {
-    font-size: 1.6rem;
+  .about h2, .interests h2 {
+    font-size: 1.4rem;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
     margin-bottom: 2rem;
-    color: #fff;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  @media (max-width: 600px) {
+    .about-grid { grid-template-columns: 1fr; }
+  }
+
+  .photo-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    border: 1px dashed rgba(56,189,183,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.25);
+    font-size: 0.8rem;
+  }
+
+  .about-text { display: flex; flex-direction: column; gap: 1rem; }
+
+  .about-text p {
+    color: #9ca3af;
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+
+  .about-text a {
+    color: #38bdb7;
+    text-decoration: none;
+  }
+  .about-text a:hover { text-decoration: underline; }
+
+  .interests-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .interest-tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid rgba(56,189,183,0.3);
+    border-radius: 999px;
+    color: #38bdb7;
+  }
+
+  /* Interests cards */
+  .interests {
+    padding: 4rem 0 6rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
   }
 
   .cards {

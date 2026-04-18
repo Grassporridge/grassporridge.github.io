@@ -10,11 +10,11 @@ const { title } = Astro.props;
     <title>{title}</title>
     <style>
       * { box-sizing: border-box; margin: 0; padding: 0; }
-      body { font-family: system-ui, sans-serif; color: #1a1a1a; }
-      nav { display: flex; gap: 2rem; padding: 1.25rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 10; }
+      body { font-family: system-ui, sans-serif; color: #1a1a1a; background: #0a0f1e; }
+      nav { display: flex; gap: 2rem; padding: 1.25rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.08); background: #0a0f1e; position: relative; z-index: 10; }
       nav a { text-decoration: none; color: rgba(255,255,255,0.6); font-size: 0.95rem; }
       nav a:hover, nav a.active { color: #fff; font-weight: 600; }
-      main { max-width: 800px; margin: 0 auto; padding: 3rem 2rem; }
+      main { max-width: 800px; margin: 0 auto; padding: 3rem 2rem; color: #e5e5e5; }
     </style>
   </head>
   <body>

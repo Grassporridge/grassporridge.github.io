@@ -19,8 +19,8 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <style>
-  h1 { font-size: 2rem; }
-  .sub { margin-top: 0.75rem; color: #555; }
+  h1 { font-size: 2rem; color: #fff; }
+  .sub { margin-top: 0.75rem; color: #9ca3af; }
 
   .links {
     margin-top: 2.5rem;
@@ -34,14 +34,15 @@ import Layout from '../layouts/Layout.astro';
     align-items: center;
     gap: 1.5rem;
     padding: 1.25rem 1.5rem;
-    border: 1px solid #e5e5e5;
+    border: 1px solid rgba(56, 189, 183, 0.25);
     border-radius: 8px;
     text-decoration: none;
-    color: inherit;
-    transition: box-shadow 0.2s;
+    color: #fff;
+    background: rgba(255,255,255,0.04);
+    transition: background 0.2s, border-color 0.2s;
   }
-  .link-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+  .link-item:hover { background: rgba(56,189,183,0.08); border-color: rgba(56,189,183,0.5); }
 
-  .label { font-size: 0.8rem; color: #888; width: 60px; }
+  .label { font-size: 0.8rem; color: #9ca3af; width: 60px; }
   .value { font-weight: 500; }
 </style>
