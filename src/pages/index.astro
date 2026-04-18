@@ -34,7 +34,8 @@ import NetworkCanvas from '../components/NetworkCanvas.tsx';
           I'm a PhD researcher in the <a href="https://www.venturellilab.org/" target="_blank">Venturelli Lab</a> in the
           Department of Biomedical Engineering at Duke University. My work sits at the intersection of
           microbial ecology, systems biology, and computational modelling; trying to understand how
-          complex biological systems are organised and how they change over time.
+          complex biological systems are organised to give rise to function, and how that function
+          changes across time.
         </p>
         <p>
           I've wanted to build a personal website for a while, somewhere to document side projects, track goals,
@@ -48,6 +49,15 @@ import NetworkCanvas from '../components/NetworkCanvas.tsx';
   <!-- Personal Interests -->
   <section class="personal">
     <h2>Outside the lab</h2>
+    <p class="personal-bio">
+      I enjoy physical activity; my most recent endeavour has been rock climbing (bouldering >> top-rope),
+      hitting the gym, and playing tennis. I practice the keyboard and am learning Mandarin, albeit being
+      objectively awful at both still.
+    </p>
+    <p class="personal-bio">
+      I absolutely love animals and insects alike (except for you, cockroaches). I would love to work at
+      an animal sanctuary if the current trajectory fails me.
+    </p>
     <div class="personal-cards">
       <div class="personal-card">
         <span class="icon">🧗</span>
@@ -188,7 +198,15 @@ import NetworkCanvas from '../components/NetworkCanvas.tsx';
     border-top: 1px solid rgba(255,255,255,0.08);
   }
 
+  .personal-bio {
+    color: #9ca3af;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
   .personal-cards {
+    margin-top: 1.5rem;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
