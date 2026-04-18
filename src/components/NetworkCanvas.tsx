@@ -31,7 +31,7 @@ function nd(rx: number, ry: number, color: string, r: number, rand: () => number
     rx, ry, color, r,
     phaseX: rand() * PI2, phaseY: rand() * PI2,
     freqX: 0.3 + rand() * 0.4, freqY: 0.3 + rand() * 0.4, amp: ampFast * (0.6 + rand() * 0.8),
-    phaseSlow: rand() * PI2, freqSlow: 0.025 + rand() * 0.055, ampSlow: ampSlow * (0.7 + rand() * 0.7),
+    phaseSlow: 0, freqSlow: 0.025 + rand() * 0.055, ampSlow: ampSlow * (0.7 + rand() * 0.7),
   };
 }
 
@@ -97,7 +97,7 @@ function buildCircular(W: number, H: number, seed: number, count: number, radius
   for (let i = 0; i < count; i++) {
     for (let j = i + 2; j < count; j++) {
       if (((i * 7 + j * 13) % 17) < (count > 10 ? 3 : 4)) {
-        const isRed = mostlyRed ? ((i + j) % 5 !== 0) : ((i + j) % 3 === 0);
+        const isRed = mostlyRed ? ((i + j) % 3 !== 0) : ((i + j) % 3 === 0);
         edges.push({ from: i, to: j, color: isRed ? 'rgba(248,113,113,' : 'rgba(74,222,128,', alpha: 0.65 });
       }
     }
@@ -108,23 +108,27 @@ function buildCircular(W: number, H: number, seed: number, count: number, radius
 }
 
 // ── Decision tree ─────────────────────────────────────────────────────────────
+// root → 2 children (green left, red right) → each → 2 grandchildren (green/red)
 function buildDecisionTree(W: number, H: number, seed: number, fx: number, fy: number, idx: number): Cluster {
   const rand = seededRand(seed);
   const { x, y, vx, vy } = clusterStart(W, H, fx, fy, (rand() - 0.5) * 0.3, (rand() - 0.5) * 0.3, idx);
-  const amber = 'rgba(251,191,36,';
+  const white = 'rgba(226,232,240,';
+  // node layout: root(0), leftChild(1), rightChild(2), ll(3), lr(4), rl(5), rr(6)
+  const xs =  [0,   -50,  50,  -75, -25,  25,  75];
+  const ys =  [-46,  -8,  -8,   30,  30,  30,  30];
+  const rs =  [5,     4,   4,  3.5, 3.5, 3.5, 3.5];
   const nodes: NodeDef[] = [];
-  // root, 2 children, 4 leaves — level spacing 38px, sibling spacing 40px
-  const levels = [[0], [-44, 44], [-66, -22, 22, 66]];
-  const ys = [-46, -8, 30];
-  for (let l = 0; l < levels.length; l++)
-    for (const rx of levels[l])
-      nodes.push(nd(rx, ys[l], amber + '0.85)', l === 0 ? 5 : l === 1 ? 4 : 3.5, rand, 3, 26));
+  for (let i = 0; i < 7; i++) nodes.push(nd(xs[i], ys[i], white + '0.85)', rs[i], rand, 3, 26));
+  const green = 'rgba(74,222,128,', red = 'rgba(248,113,113,';
   const edges: EdgeDef[] = [
-    { from: 0, to: 1, color: amber, alpha: 0.45 }, { from: 0, to: 2, color: amber, alpha: 0.45 },
-    { from: 1, to: 3, color: amber, alpha: 0.35 }, { from: 1, to: 4, color: amber, alpha: 0.35 },
-    { from: 2, to: 5, color: amber, alpha: 0.35 }, { from: 2, to: 6, color: amber, alpha: 0.35 },
+    { from: 0, to: 1, color: green, alpha: 0.7 },  // root → left (green)
+    { from: 0, to: 2, color: red,   alpha: 0.7 },  // root → right (red)
+    { from: 1, to: 3, color: green, alpha: 0.55 }, // left → ll (green)
+    { from: 1, to: 4, color: red,   alpha: 0.55 }, // left → lr (red)
+    { from: 2, to: 5, color: green, alpha: 0.55 }, // right → rl (green)
+    { from: 2, to: 6, color: red,   alpha: 0.55 }, // right → rr (red)
   ];
-  return { x, y, vx, vy, nodes, edges, pad: 80 };
+  return { x, y, vx, vy, nodes, edges, pad: 90 };
 }
 
 // ── Unrolled GRU ──────────────────────────────────────────────────────────────
