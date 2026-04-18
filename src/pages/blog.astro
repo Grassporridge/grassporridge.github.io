@@ -1,8 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import BlogPosts from '../components/BlogPosts.tsx';
 ---
 
-<Layout title="Blog">
-  <h1 style="color:#fff;">Blog</h1>
-  <p style="margin-top: 1rem; color: #9ca3af;">Posts coming soon.</p>
+<Layout title="Monthly Projects">
+  <h1 style="color:#fff;">Monthly Projects</h1>
+  <p class="sub">
+    A research project a month — problems and analyses I find interesting to dig into.
+    These are a decent cross-section of what keeps me curious outside the lab.
+    Feel free to reach out with suggestions for future projects.
+  </p>
+
+  <BlogPosts client:only="react" />
 </Layout>
+
+<style>
+  .sub {
+    margin-top: 0.6rem;
+    margin-bottom: 2rem;
+    color: #9ca3af;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    max-width: 600px;
+  }
+</style>
