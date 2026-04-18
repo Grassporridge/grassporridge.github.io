@@ -5,7 +5,7 @@ import NetworkCanvas from '../components/NetworkCanvas.tsx';
 
 <Layout title="Home">
   <!-- Hero -->
-  <div class="hero">
+  <div slot="full-width" class="hero">
     <NetworkCanvas client:only="react" />
     <div class="hero-content">
       <h1>Grassporridge</h1>
@@ -43,9 +43,6 @@ import NetworkCanvas from '../components/NetworkCanvas.tsx';
 </Layout>
 
 <style>
-  /* override main padding for hero */
-  :global(main) { padding: 0 !important; }
-
   .hero {
     position: relative;
     height: 90vh;
